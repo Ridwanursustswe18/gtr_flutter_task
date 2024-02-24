@@ -38,7 +38,8 @@ class _MyAppState extends State<MyApp> {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         nextPage();
-      } else if (_scrollController.position.pixels == 0) {
+      } else if (_scrollController.position.pixels ==
+          _scrollController.position.minScrollExtent) {
         previousPage();
       }
     });

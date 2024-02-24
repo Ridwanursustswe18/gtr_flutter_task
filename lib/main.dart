@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -19,16 +18,36 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late Future<Map<String, dynamic>> _futureUser;
+  List<dynamic> _customerList = []; // Store the current customer list
+
   late Future<List<dynamic>> _futureCustomerList = Future.value([]);
   int _currentPage = 1;
   int _pageSize = 20;
 
   String? _token;
+  ScrollController _scrollController =
+      ScrollController(); // Step 1: Add ScrollController
 
   @override
   void initState() {
     super.initState();
     _futureUser = fetchUser();
+
+    // Step 2: Add listener to ScrollController for infinite scrolling
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        nextPage();
+      } else if (_scrollController.position.pixels == 0) {
+        previousPage();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose(); // Dispose the ScrollController
+    super.dispose();
   }
 
   Future<Map<String, dynamic>> fetchUser() async {
@@ -58,32 +77,6 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  void showDialogMessage(BuildContext context, String message) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Row(
-            children: [
-              Icon(Icons.info, color: Colors.blue), // Information icon
-              SizedBox(width: 8),
-              Text('Warning'),
-            ],
-          ),
-          content: Text(message),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   Future<void> getCustomersList(String token) async {
     // Perform another request using the token to fetch customer list
     final response = await http.get(
@@ -104,30 +97,30 @@ class _MyAppState extends State<MyApp> {
         setState(() {
           _currentPage--;
         });
-        String message = "No more Customer are available";
-        showDialogMessage(context, message);
       }
     } else {
       throw Exception('Failed to perform another request');
     }
   }
 
-  void nextPage() {
-    setState(() {
-      _currentPage++;
-    });
-    getCustomersList(_token!);
+  Future<void> nextPage() async {
+    final customerList =
+        await _futureCustomerList; // Wait for the future to complete
+    if (customerList.isNotEmpty) {
+      // Check if the list is not empty
+      setState(() {
+        _currentPage++;
+      });
+      getCustomersList(_token!);
+    }
   }
 
-  void previousPage() {
+  Future<void> previousPage() async {
     if (_currentPage > 1) {
       setState(() {
         _currentPage--;
       });
-      getCustomersList(_token!);
-    } else {
-      String message = "You can not go back any more";
-      showDialogMessage(context, message);
+      await getCustomersList(_token!);
     }
   }
 
@@ -153,6 +146,8 @@ class _MyAppState extends State<MyApp> {
                   } else if (snapshot.hasData) {
                     final customerList = snapshot.data!;
                     return ListView.builder(
+                      controller:
+                          _scrollController, // Step 3: Attach ScrollController
                       itemCount: customerList.length,
                       itemBuilder: (context, index) {
                         final customer = customerList[index];
@@ -200,28 +195,6 @@ class _MyAppState extends State<MyApp> {
                   return const Text(
                       'No customers found'); // Show this if no data is available
                 },
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      previousPage();
-                    },
-                    icon: const Icon(
-                        Icons.arrow_back), // Icon for "Previous Page"
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      nextPage();
-                    },
-                    icon:
-                        const Icon(Icons.arrow_forward), // Icon for "Next Page"
-                  ),
-                ],
               ),
             ),
           ],
@@ -299,16 +272,27 @@ class CustomerDetailsPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  'Name:',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Text(
-                                  customer['Name'] ?? 'N/A',
-                                  style: const TextStyle(fontSize: 16),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'Name:',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                        width:
+                                            10), // Adjust the width as needed
+                                    Expanded(
+                                      child: Text(
+                                        customer['Name'] ?? 'N/A',
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 const SizedBox(height: 10),
                                 Row(
@@ -325,6 +309,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     ),
                                   ],
                                 ),
+                                const SizedBox(height: 10),
                                 Row(
                                   children: [
                                     const Icon(Icons.phone,

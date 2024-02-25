@@ -27,12 +27,17 @@ class CustomerDetailsPage extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      "https://www.pqstec.com/InvoiceApps${customer['ImagePath']}",
-                    ),
-                    radius: 100,
-                  ),
+                  child: customer['ImagePath'] != null
+                      ? CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            "https://www.pqstec.com/InvoiceApps${customer['ImagePath']}",
+                          ),
+                          radius: 100,
+                        )
+                      : const CircleAvatar(
+                          radius: 100,
+                          child: Image(image: AssetImage('assets/human.jpg'))
+                        ),
                 ),
               ),
             ),

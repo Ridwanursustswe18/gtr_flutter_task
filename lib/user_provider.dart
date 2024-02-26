@@ -15,6 +15,7 @@ class UserProvider with ChangeNotifier {
   User? get user => _user;
 
   Future<void> loginUser() async {
+    try{
     final response = await http.get(Uri.parse(
         'https://www.pqstec.com/InvoiceApps/Values/LogIn?UserName=admin@gmail.com&Password=admin1234&ComId=1'));
 
@@ -27,6 +28,9 @@ class UserProvider with ChangeNotifier {
       notifyListeners();
     } else {
       throw Exception('Failed to log in');
+    }
+    }catch (error) {
+      throw Exception('Request failed: $error');
     }
   }
 }

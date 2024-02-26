@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_gtr/customer_details.dart';
 import 'package:flutter_application_gtr/customer_provider.dart';
@@ -51,21 +53,27 @@ class _MyAppState extends State<MyApp> {
     try {
       await _userProvider.loginUser();
       _token = _userProvider.user?.token;
-      if (_token != Null) {
+      if (_userProvider.user?.userName == 'admin') {
         await _customerProvider.fetchCustomers(_token!);
+      } else {
+        throw Exception('You are not authorized');
       }
     } catch (error) {
-      print('Error fetching data: $error');
+      throw Exception('Error fetching data: $error');
     }
   }
 
   void _scrollListener() {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
-      _customerProvider.fetchCustomers(_token!, nextPage: true);
+      Timer(const Duration(milliseconds: 1250), () {
+        _customerProvider.fetchCustomers(_token!, nextPage: true);
+      });
     } else if (_scrollController.position.pixels ==
         _scrollController.position.minScrollExtent) {
-      _customerProvider.fetchCustomers(_token!, previousPage: true);
+      Timer(const Duration(milliseconds: 1250), () {
+        _customerProvider.fetchCustomers(_token!, previousPage: true);
+      });
     }
   }
 

@@ -27,17 +27,16 @@ class CustomerDetailsPage extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: customer['ImagePath'] != null
+                  child: customer.imagePath != null
                       ? CircleAvatar(
                           backgroundImage: NetworkImage(
-                            "https://www.pqstec.com/InvoiceApps${customer['ImagePath']}",
+                            "https://www.pqstec.com/InvoiceApps${customer.imagePath}",
                           ),
                           radius: 100,
                         )
                       : const CircleAvatar(
                           radius: 100,
-                          child: Image(image: AssetImage('assets/human.jpg'))
-                        ),
+                          child: Image(image: AssetImage('assets/human.jpg'))),
                 ),
               ),
             ),
@@ -78,7 +77,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Text(
-                                        customer['Name'] ?? 'N/A',
+                                        customer.name ?? 'N/A',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -90,10 +89,10 @@ class CustomerDetailsPage extends StatelessWidget {
                                     const Icon(Icons.email, color: Colors.blue),
                                     const SizedBox(width: 10),
                                     Text(
-                                      customer['Email'] == null ||
-                                              customer['Email'] == ""
+                                      customer.email == null ||
+                                              customer.email == ""
                                           ? 'N/A'
-                                          : customer['Email'],
+                                          : customer.email,
                                       style: const TextStyle(fontSize: 16),
                                     ),
                                   ],
@@ -104,10 +103,10 @@ class CustomerDetailsPage extends StatelessWidget {
                                     const Icon(Icons.phone, color: Colors.blue),
                                     const SizedBox(width: 10),
                                     Text(
-                                      customer['Phone'] == null ||
-                                              customer['Phone'] == ""
+                                      customer.phone == null ||
+                                              customer.phone == ""
                                           ? 'N/A'
-                                          : customer['Phone'],
+                                          : customer.phone,
                                       style: const TextStyle(fontSize: 16),
                                     ),
                                   ],
@@ -127,7 +126,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Text(
-                                        customer['Notes'] ?? 'N/A',
+                                        customer.notes ?? 'N/A',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -148,7 +147,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Text(
-                                        customer['CustType'] ?? 'N/A',
+                                        customer.custType ?? 'N/A',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -169,7 +168,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Text(
-                                        customer['PrimaryAddress'] ?? 'N/A',
+                                        customer.primaryAddress ?? 'N/A',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -190,7 +189,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Text(
-                                        customer['SecondaryAddress'] ?? 'N/A',
+                                        customer.secondaryAddress ?? 'N/A',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -211,7 +210,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Text(
-                                        customer['ParentCustomer'] ?? 'N/A',
+                                        customer.parentCustomer ?? 'N/A',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -234,7 +233,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                             10), // Adjust the width as needed
                                     Expanded(
                                       child: Text(
-                                        customer['ClinetCompanyName'] ?? 'N/A',
+                                        customer.clientCompanyName ?? 'N/A',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -267,8 +266,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                             10), // Adjust the width as needed
                                     Expanded(
                                       child: Text(
-                                        customer['TotalDue']
-                                            ?.toStringAsFixed(4),
+                                        customer.totalDue?.toStringAsFixed(4),
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -291,10 +289,10 @@ class CustomerDetailsPage extends StatelessWidget {
                                             10), // Adjust the width as needed
                                     Expanded(
                                       child: Text(
-                                        customer['LastSalesDate'] == null ||
-                                                customer['LastSalesDate'] == ''
+                                        customer.lastSalesDate == null ||
+                                                customer.lastSalesDate == ''
                                             ? 'N/A'
-                                            : customer['LastSalesDate'],
+                                            : customer.lastSalesDate,
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -317,10 +315,10 @@ class CustomerDetailsPage extends StatelessWidget {
                                             10), // Adjust the width as needed
                                     Expanded(
                                       child: Text(
-                                        customer['LastInvoiceNo'] == null ||
-                                                customer['LastInvoiceNo'] == ''
+                                        customer.lastInvoiceNo == null ||
+                                                customer.lastInvoiceNo == ''
                                             ? 'N/A'
-                                            : customer['LastInvoiceNo'],
+                                            : customer.lastInvoiceNo,
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -343,11 +341,10 @@ class CustomerDetailsPage extends StatelessWidget {
                                             10), // Adjust the width as needed
                                     Expanded(
                                       child: Text(
-                                        customer['LastSoldProduct'] == null ||
-                                                customer['LastSoldProduct'] ==
-                                                    ''
+                                        customer.lastSoldProduct == null ||
+                                                customer.lastSoldProduct == ''
                                             ? 'N/A'
-                                            : customer['LastSoldProduct'],
+                                            : customer.lastSoldProduct,
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -370,7 +367,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                             10), // Adjust the width as needed
                                     Expanded(
                                       child: Text(
-                                        customer['TotalSalesValue']
+                                        customer.totalSalesValue
                                             ?.toStringAsFixed(4),
                                         style: const TextStyle(fontSize: 16),
                                       ),
@@ -394,7 +391,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                             10), // Adjust the width as needed
                                     Expanded(
                                       child: Text(
-                                        customer['TotalSalesReturnValue']
+                                        customer.totalSalesReturnValue
                                             ?.toStringAsFixed(4),
                                         style: const TextStyle(fontSize: 16),
                                       ),
@@ -418,7 +415,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                             10), // Adjust the width as needed
                                     Expanded(
                                       child: Text(
-                                        customer['TotalAmountBack']
+                                        customer.totalAmountBack
                                             ?.toStringAsFixed(4),
                                         style: const TextStyle(fontSize: 16),
                                       ),
@@ -442,7 +439,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                             10), // Adjust the width as needed
                                     Expanded(
                                       child: Text(
-                                        customer['TotalCollection']
+                                        customer.totalCollection
                                             ?.toStringAsFixed(4),
                                         style: const TextStyle(fontSize: 16),
                                       ),
@@ -466,13 +463,11 @@ class CustomerDetailsPage extends StatelessWidget {
                                             10), // Adjust the width as needed
                                     Expanded(
                                       child: Text(
-                                        customer['LastTransactionDate'] ==
-                                                    null ||
-                                                customer[
-                                                        'LastTransactionDate'] ==
+                                        customer.lastTransactionDate == null ||
+                                                customer.lastTransactionDate ==
                                                     ''
                                             ? 'N/A'
-                                            : customer['LastTransactionDate'],
+                                            : customer.lastTransactionDate,
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),

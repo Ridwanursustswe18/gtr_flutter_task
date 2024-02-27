@@ -312,7 +312,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     ),
                                     const SizedBox(
                                         width:
-                                            10), // Adjust the width as needed
+                                            10), 
                                     Expanded(
                                       child: Text(
                                         customer.lastInvoiceNo == null ||
@@ -338,7 +338,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     ),
                                     const SizedBox(
                                         width:
-                                            10), // Adjust the width as needed
+                                            10), 
                                     Expanded(
                                       child: Text(
                                         customer.lastSoldProduct == null ||
@@ -364,7 +364,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     ),
                                     const SizedBox(
                                         width:
-                                            10), // Adjust the width as needed
+                                            10), 
                                     Expanded(
                                       child: Text(
                                         customer.totalSalesValue
@@ -388,7 +388,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     ),
                                     const SizedBox(
                                         width:
-                                            10), // Adjust the width as needed
+                                            10), 
                                     Expanded(
                                       child: Text(
                                         customer.totalSalesReturnValue
@@ -412,7 +412,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     ),
                                     const SizedBox(
                                         width:
-                                            10), // Adjust the width as needed
+                                            10), 
                                     Expanded(
                                       child: Text(
                                         customer.totalAmountBack
@@ -436,7 +436,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     ),
                                     const SizedBox(
                                         width:
-                                            10), // Adjust the width as needed
+                                            10), 
                                     Expanded(
                                       child: Text(
                                         customer.totalCollection
@@ -460,7 +460,7 @@ class CustomerDetailsPage extends StatelessWidget {
                                     ),
                                     const SizedBox(
                                         width:
-                                            10), // Adjust the width as needed
+                                            10), 
                                     Expanded(
                                       child: Text(
                                         customer.lastTransactionDate == null ||

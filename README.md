@@ -1,17 +1,24 @@
 # flutter_application_gtr
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Features implemented
+- Implemented provider state management for efficient state management throughout the application.
+- Implemented authorization
+- showed customer list with pagination
+    - The pagination works based on the scrolling.
+    - by clicking the button in right side you can see customer details.
+- Showed customer image along with its details
+- Tried to keep the code clean and ui user friendly. 
+## Screenshots of the application
+<div style="display: flex;">
+  <img src="Screenshot_2024-02-27-16-17-19-74.jpg" alt="Image 1">
+  <img src="Screenshot_2024-02-27-16-17-19-74.jpg" alt="Image 2">
+  <img src="Screenshot_2024-02-27-16-17-19-74.jpg" alt="Image 3">
+</div>
 
-A few resources to get you started if this is your first Flutter project:
+## Apk drive link
+[Click here to download the android apk](https://drive.google.com/file/d/1gaQ4RpzEJ9nlfGypO_QcU4V0syO1eNwj/view?usp=sharing)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# gtr_flutter_task
+

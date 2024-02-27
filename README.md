@@ -12,9 +12,9 @@
 - Tried to keep the code clean and ui user friendly. 
 ## Screenshots of the application
 <div style="display: flex;">
-  <img src="Screenshot_2024-02-27-16-17-19-74.jpg" alt="Image 1">
-  <img src="Screenshot_2024-02-27-16-17-19-74.jpg" alt="Image 2">
-  <img src="Screenshot_2024-02-27-16-17-19-74.jpg" alt="Image 3">
+  <img src="Screenshot_2024-02-27-16-17-19-74.jpg" alt="Image 1" style="width: 100px; height: auto; margin-right: 10px;">
+  <img src="Screenshot_2024-02-27-16-17-28-26.jpg" alt="Image 2" style="width: 100px; height: auto; margin-right: 10px;">
+  <img src="Screenshot_2024-02-27-16-17-37-28.jpg" alt="Image 3" style="width: 100px; height: auto;">
 </div>
 
 ## Apk drive link
